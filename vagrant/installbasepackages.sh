@@ -15,14 +15,19 @@ yum -y update
 yum install -y gcc* kernel-devel epel-release
 # mount fix: I disabled mounting /vagrant in the VagrantFile
 
-# apache
-yum -y install httpd
+# installing   apache   mysql
+yum -y install httpd    mysql-server
 
 # apache services -- [ON]
 #rm -rf /var/www/html                      # change webroot to vagrant folder
 #ln -fs /vagrant /var/www/html             # ^
+# TODO add a way to edit the line?
 service httpd restart
 chkconfig httpd on
+
+# mysql services -- [ON]
+/etc/init.d/mysqld restart
+chkconkconfig mysqld on
 
 # log apache service
 echo >> $VAGRANTLOG
